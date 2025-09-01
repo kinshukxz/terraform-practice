@@ -1,6 +1,6 @@
 output "my_ec2_ip" {
   value = aws_instance.kinshuk-ec2.public_ip
-  
+
 }
 output "ec2_puublic_dns" {
   value = aws_instance.kinshuk-ec2.public_dns
