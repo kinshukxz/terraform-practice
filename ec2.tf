@@ -46,8 +46,12 @@ resource "aws_security_group" "security-group-kinshuk" {
   }
 }
 resource "aws_instance" "kinshuk-ec2" {
+  for_each    = tomap({
+    instance_1_Kinshuk_micro = "t2.micro"
+    instance_2_Kinshuk_medium = "t2.medium"
+  })
   ami           = "ami-084568db4383264d4"
-  instance_type = "t2.micro"
+  instance_type = each.value
   region        = "us-east-1"
   user_data     = file("install_nginx.sh")
 
@@ -60,7 +64,7 @@ resource "aws_instance" "kinshuk-ec2" {
   }
 
   tags = {
-    Name = "Kinshuk-EC2-haha"
+    Name = each.key
   }
 }
 
