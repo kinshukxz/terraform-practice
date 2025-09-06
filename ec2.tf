@@ -46,10 +46,11 @@ resource "aws_security_group" "security-group-kinshuk" {
   }
 }
 resource "aws_instance" "kinshuk-ec2" {
-  for_each    = tomap({
-    instance_1_Kinshuk_micro = "t2.micro"
+  for_each = tomap({
+    instance_1_Kinshuk_micro  = "t2.micro"
     instance_2_Kinshuk_medium = "t2.medium"
   })
+  depends_on    = [aws_security_group.security-group-kinshuk]
   ami           = "ami-084568db4383264d4"
   instance_type = each.value
   region        = "us-east-1"
